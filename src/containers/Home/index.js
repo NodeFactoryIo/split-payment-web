@@ -1,7 +1,7 @@
 import React from 'react';
 import { Hero } from '../../components/Hero';
 import { Web3Provider } from '../../Web3Provider';
-import { TransactionsList } from '../TransactionsList';
+import TransactionsList from '../TransactionsList';
 
 export class Home extends React.Component {
   render() {

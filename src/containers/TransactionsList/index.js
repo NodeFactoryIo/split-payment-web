@@ -1,14 +1,18 @@
 import React from 'react';
-import { Web3Context } from '../../Web3Provider';
+import { connect } from 'react-redux';
 
-export class TransactionsList extends React.Component {
+import { Web3Context } from '../../Web3Provider';
+import { actions } from '../Home/actions';
+
+class TransactionsList extends React.Component {
   static contextType = Web3Context;
 
   componentDidMount() {
     const { provider } = this.context;
+    const { requestETHTransactions } = this.props;
 
     provider.listAccounts().then((accounts) => {
-      console.log(accounts);
+      requestETHTransactions(accounts[0]);
     });
   }
 
@@ -20,3 +24,7 @@ export class TransactionsList extends React.Component {
     )
   }
 }
+
+export default connect(null, {
+  requestETHTransactions: actions.requestETHTransactions,
+})(TransactionsList);
