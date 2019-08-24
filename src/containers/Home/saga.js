@@ -1,5 +1,6 @@
 import { call, takeLatest, put } from 'redux-saga/effects';
 import { ETH_TRANSACTIONS_URL } from '../../etherscan-api';
+import Box from "3box";
 import { REQUEST_ETH_TRANSACTIONS, REQUEST_ETH_TRANSACTIONS_ERROR, REQUEST_ETH_TRANSACTIONS_SUCCESS } from './actions';
 
 function* getETHTransactions() {
@@ -11,7 +12,15 @@ function* getETHTransactions() {
       const payload = yield response.json();
 
       if (payload.status !== "0") {
-        yield put({ type: REQUEST_ETH_TRANSACTIONS_SUCCESS, payload: payload.result });
+        let transactions = payload.result.filter(tx => tx.gas === "21000");
+        transactions = yield Promise.all(transactions.slice(-5).map(async tx => {
+          const profile = await Box.getProfile(tx.to);
+          return {
+            ...tx,
+            identity: profile
+          }
+        }));
+        yield put({ type: REQUEST_ETH_TRANSACTIONS_SUCCESS, payload: transactions });
       } else {
         throw new Error(payload.result);
       }

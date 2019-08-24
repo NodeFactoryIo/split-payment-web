@@ -1,6 +1,7 @@
 import React from 'react';
 
 export function SmallHeader({title, goHome, rightButton = null}) {
+
     return (
         <section className="small-header" >
             <div className="hero-body">
