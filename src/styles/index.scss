@@ -1,4 +1,9 @@
 @charset "utf-8";
 @import "~bulma/bulma";
 
+@import "components/Menu";
+@import "components/RoundContainer";
+@import "components/Transaction";
+
 @import "App.scss";
+@import "TransactionList";

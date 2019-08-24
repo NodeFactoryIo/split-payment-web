@@ -1,0 +1,19 @@
+.transaction {
+  width: 100%;
+  height: 120px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  &:hover {
+    background-color: white;
+    transition: 0.4s;
+  }
+
+  .avatar {
+    margin: 10px;
+    width: 100px;
+    border-radius: 50%;
+  }
+}

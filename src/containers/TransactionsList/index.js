@@ -4,34 +4,33 @@ import { ethers } from 'ethers';
 
 import { Web3Context } from '../../Web3Provider';
 import { actions } from '../Home/actions';
+import {Header} from "../../components/Header";
+import {Menu} from "../../components/Menu";
+import {SmallHeader} from "../../components/SmallHeader";
+import {Transaction} from "../../components/Transaction";
 
-class TransactionsList extends React.Component {
+export class TransactionsList extends React.Component {
   static contextType = Web3Context;
 
-  componentDidMount() {
-    const { provider } = this.context;
-    const { requestETHTransactions } = this.props;
-
-    provider.listAccounts().then((accounts) => {
-      requestETHTransactions(accounts[0]);
-    });
-  }
+  // componentDidMount() {
+  //   const { provider } = this.context;
+  //   const { requestETHTransactions } = this.props;
+  //
+  //   provider.listAccounts().then((accounts) => {
+  //     requestETHTransactions(accounts[0]);
+  //   });
+  // }
 
   render() {
     const { transactions } = this.props;
 
     return (
-      <div>
-        {transactions.map((tx, index) => {
-          return (
-            <div key={index}>
-              <span>{tx.hash}</span><br />
-              <span>{tx.to}</span><br />
-              <span>{ethers.utils.formatEther(tx.value)} ETH</span><br /><br />
-            </div>
-          )
-        })}
-      </div>
+        <div>
+          <SmallHeader title="Pick transaction to split"/>
+          <div  className="container transaction-list">
+            <Transaction />
+          </div>
+        </div>
     )
   }
 }

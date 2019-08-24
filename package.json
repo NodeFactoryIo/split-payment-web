@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://nodefactoryio.github.io/split-payment-web",
   "dependencies": {
+    "@material-ui/core": "^4.3.3",
+    "@material-ui/icons": "^4.2.1",
     "bulma": "^0.7.5",
     "ethers": "^4.0.36",
     "gh-pages": "^2.1.1",
