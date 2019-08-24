@@ -1,6 +1,7 @@
 import React from 'react';
 import blockies from 'ethereum-blockies';
 import MaterialAvatar from '@material-ui/core/Avatar';
+import { getAssetURL } from '../utils/ipfs';
 
 export class Avatar extends React.Component {
   getOpts() {
@@ -15,7 +16,10 @@ export class Avatar extends React.Component {
   }
 
   componentDidMount() {
-    this.draw();
+    const { imageHash } = this.props;
+    if (!imageHash) {
+      this.draw();
+    }
   }
 
   draw() {
@@ -23,13 +27,17 @@ export class Avatar extends React.Component {
   }
 
   render() {
+    const { imageHash } = this.props;
     const blockie = React.createElement('canvas', {
       ref: canvas => (this.canvas = canvas),
     });
 
+
     return (
       <MaterialAvatar>
-        {blockie}
+        {!imageHash ? blockie : null}
+
+        {imageHash ? <img className="avatar" src={getAssetURL(imageHash)} /> : null}
       </MaterialAvatar>
     );
   }

@@ -12,6 +12,13 @@
   width: 50%;
 }
 
+.avatar {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
 // general
 .row {
   display: flex;

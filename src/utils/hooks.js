@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export function useOutsideClickHandler(ref, shouldAlert, onClose) {
   function handleClickOutside(event) {

@@ -1,9 +1,12 @@
-import React, { useRef }  from 'react';
+import React, { useRef, useEffect }  from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Checkbox from '@material-ui/core/Checkbox';
+import Box from '3box';
+import { Avatar } from '../../components/Avatar';
 
 import { useOutsideClickHandler } from '../../utils/hooks';
 
@@ -35,23 +38,41 @@ export function AddressBook ({ visible, onClose, onSelectedItems }) {
   const wrapperRef = useRef(null);
   useOutsideClickHandler(wrapperRef, visible, beforeClose);
 
+  const [profiles, setProfiles] = React.useState([]);
+
+  useEffect(() => {
+    // TODO: read addresses from props
+    const addresses = ['0xAf0f557a9a7E84Bdd02aDBc14962df2789d95D4e'];
+    const profiles = [];
+    addresses.map(async(address) => {
+      const fetchedProfile = await Box.getProfile(address);
+      profiles.push({...fetchedProfile, address });
+    });
+    setProfiles(profiles);
+  }, []);
+
+  console.log(profiles);
+
   return (
     <List className={className} ref={wrapperRef}>
-      {[0, 1, 2, 3].map(value => {
-        const labelId = `checkbox-list-label-${value}`;
-
+      {profiles.map(profile => {
         return (
-          <ListItem key={value} dense button onClick={handleToggle(value)}>
-            <ListItemIcon>
+          <ListItem key={profile.address} dense button>
+            <ListItemAvatar>
+              <Avatar imageHash={profile.image[0].contentUrl['/']}/>
+            </ListItemAvatar>
+
+            <ListItemText primary={profile.name} />
+
+            <ListItemSecondaryAction>
               <Checkbox
+                onClick={handleToggle(profile.address)}
                 edge="start"
-                checked={checked.indexOf(value) !== -1}
+                checked={checked.indexOf(profile.address) !== -1}
                 tabIndex={-1}
                 disableRipple
-                inputProps={{ 'aria-labelledby': labelId }}
               />
-            </ListItemIcon>
-            <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+            </ListItemSecondaryAction>
           </ListItem>
         );
       })}
