@@ -1,0 +1,34 @@
+@import "colors";
+
+.success-screen {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .success-image {
+    width: 200px;
+  }
+
+  .description {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .proceed {
+    background-color: transparent;
+    height: 80px;
+    width: 200px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: white;
+      color: $color-main;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import {SmallHeader} from "../../components/SmallHeader";
-import {HOME} from "../../routes";
+import {HOME, SPLIT_SUCCESS} from "../../routes";
 import {AddressBook} from "../../components/AddressBook";
 import Box from '3box';
 import {ContactsButton} from "../../components/ContactsButton";
@@ -35,9 +35,13 @@ export class AddressBookContainer extends React.Component {
     this.props.history.push(HOME);
   };
 
+  sendNotifications = () => {
+      this.props.history.push(SPLIT_SUCCESS);
+  };
+
   getSubmitButton() {
      return (
-         <ContactsButton count={2}/>
+         <ContactsButton count={2} onClick={this.sendNotifications}/>
      )
   }
 
