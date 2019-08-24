@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Link } from '@material-ui/core';
 
 import { EthAddressInput } from '../../components/EthAddressInput';
+import { Modal } from '../../components/Modal';
 
 export class RequestPaymentForm extends React.Component {
   constructor(props) {
@@ -9,9 +10,11 @@ export class RequestPaymentForm extends React.Component {
     this.state = {
       addresses: [],
       requestedAmount: 0,
+      openAddressBook: false,
     };
 
     this.addAddress = this.addAddress.bind(this);
+    this.toggleAddressBook = this.toggleAddressBook.bind(this);
   }
 
   addAddress(address) {
@@ -27,6 +30,24 @@ export class RequestPaymentForm extends React.Component {
     this.setState({ requestedAmount });
   }
 
+  toggleAddressBook() {
+    this.setState({ openAddressBook: !this.state.openAddressBook })
+  }
+
+  renderAddressBook() {
+    const { openAddressBook } = this.state;
+    if (!openAddressBook) return null;
+
+    return (
+      <Modal
+        onClose={this.toggleAddressBook}
+        isOpen={openAddressBook}
+      >
+        <span>just some modal content</span>
+      </Modal>
+    )
+  }
+
   render() {
     const { addresses, requestedAmount } = this.state;
 
@@ -40,6 +61,11 @@ export class RequestPaymentForm extends React.Component {
         ))}
 
         <EthAddressInput addAddress={this.addAddress} />
+        <Link href="#" onClick={this.toggleAddressBook}>
+          ...or choose in address book
+        </Link>
+
+        {this.renderAddressBook()}
 
         {!!requestedAmount ?
           <div>
