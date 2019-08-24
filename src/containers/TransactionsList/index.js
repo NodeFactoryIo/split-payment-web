@@ -4,6 +4,8 @@ import { ethers } from 'ethers';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import { Avatar } from '../../components/Avatar';
 
 import { Web3Context } from '../../Web3Provider';
 import { actions } from '../Home/actions';
@@ -29,6 +31,9 @@ class TransactionsList extends React.Component {
           const amount = `${ethers.utils.formatEther(tx.value)} ETH`;
           return (
             <ListItem key={index}>
+              <ListItemAvatar>
+                <Avatar address={tx.to} />
+              </ListItemAvatar>
               <ListItemText primary={tx.hash} secondary={`${tx.to} - ${amount}`} />
             </ListItem>
           )

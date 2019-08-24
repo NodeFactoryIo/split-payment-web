@@ -5,6 +5,7 @@
   "homepage": "https://nodefactoryio.github.io/split-payment-web",
   "dependencies": {
     "@material-ui/core": "^4.3.3",
+    "ethereum-blockies": "^0.1.1",
     "ethers": "^4.0.36",
     "gh-pages": "^2.1.1",
     "react": "^16.9.0",
