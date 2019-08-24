@@ -1,5 +1,6 @@
 import React from 'react';
 import { EthAddressInput } from '../../components/EthAddressInput';
+import { REQUEST_PAYMENT_ROUTE } from '../../routes';
 
 export class RequestPaymentForm extends React.Component {
   constructor(props) {
@@ -49,6 +50,10 @@ export class RequestPaymentForm extends React.Component {
             <span>{requestedAmount}</span>
           </div>
         : null}
+
+        <button className="button is-link">
+          Request
+        </button>
       </div>
     )
   }
