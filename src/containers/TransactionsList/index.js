@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ethers } from 'ethers';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import { Web3Context } from '../../Web3Provider';
 import { actions } from '../Home/actions';
@@ -21,17 +24,16 @@ class TransactionsList extends React.Component {
     const { transactions } = this.props;
 
     return (
-      <div>
+      <List>
         {transactions.map((tx, index) => {
+          const amount = `${ethers.utils.formatEther(tx.value)} ETH`;
           return (
-            <div key={index}>
-              <span>{tx.hash}</span><br />
-              <span>{tx.to}</span><br />
-              <span>{ethers.utils.formatEther(tx.value)} ETH</span><br /><br />
-            </div>
+            <ListItem key={index}>
+              <ListItemText primary={tx.hash} secondary={`${tx.to} - ${amount}`} />
+            </ListItem>
           )
         })}
-      </div>
+      </List>
     )
   }
 }

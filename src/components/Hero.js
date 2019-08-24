@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { REQUEST_PAYMENT_ROUTE } from '../routes';
+import Button from '@material-ui/core/Button';
 
-export function Hero() {
+export function Hero({ onRequestClick }) {
   return (
     <section className="hero is-medium is-primary is-bold">
       <div className="hero-body">
@@ -14,12 +13,13 @@ export function Hero() {
             Split your expenses any time
           </h2>
 
-          <Link
-            to={REQUEST_PAYMENT_ROUTE}
-            className="button is-link"
+          <Button
+            onClick={onRequestClick}
+            variant="contained"
+            color="primary"
           >
             Request payment
-          </Link>
+          </Button>
         </div>
       </div>
     </section>
