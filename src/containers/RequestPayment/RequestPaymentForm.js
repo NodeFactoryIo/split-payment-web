@@ -47,14 +47,19 @@ export class RequestPaymentForm extends React.Component {
         ))}
 
         <EthAddressInput addAddress={this.addAddress} />
-        <Link href="#" onClick={this.toggleAddressBook}>
-          ...or choose in address book
-        </Link>
 
         <AddressBook
-          openAddressBook={openAddressBook}
+          visible={openAddressBook}
           onClose={this.toggleAddressBook}
         />
+
+        <Link
+          style={openAddressBook ? { display: 'none' } : {}}
+          href="#"
+          onClick={this.toggleAddressBook}
+        >
+          ...or choose in address book
+        </Link>
 
         {!!requestedAmount ?
           <div>

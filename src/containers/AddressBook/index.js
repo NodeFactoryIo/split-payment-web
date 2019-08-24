@@ -1,16 +1,16 @@
-import React, { useState }  from 'react';
+import React, { useRef }  from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import CommentIcon from '@material-ui/icons/Comment';
 
-export function AddressBook ({ openAddressBook, onClose }) {
+import { useOutsideClickHandler } from '../../utils/hooks';
+
+
+export function AddressBook ({ visible, onClose }) {
   let className = 'address-book-container';
-  className += openAddressBook ? ' active' : '';
+  className += visible ? ' active' : '';
 
   const [checked, setChecked] = React.useState([0]);
 
@@ -27,8 +27,11 @@ export function AddressBook ({ openAddressBook, onClose }) {
     setChecked(newChecked);
   };
 
+  const wrapperRef = useRef(null);
+  useOutsideClickHandler(wrapperRef, visible, onClose);
+
   return (
-    <List className={className}>
+    <List className={className} ref={wrapperRef}>
       {[0, 1, 2, 3].map(value => {
         const labelId = `checkbox-list-label-${value}`;
 
