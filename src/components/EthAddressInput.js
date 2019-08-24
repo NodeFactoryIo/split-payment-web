@@ -1,5 +1,6 @@
 import { ethers } from 'ethers/index';
 import React, { useState } from 'react';
+import { TextField } from '@material-ui/core';
 
 export const EthAddressInput = ({ addAddress }) => {
   const [typingAddress, setTypingAddress] = useState('');
@@ -21,12 +22,12 @@ export const EthAddressInput = ({ addAddress }) => {
   }
 
   return (
-    <input
+    <TextField
       onChange={onChangeAddress}
+      label="Friend"
       value={typingAddress}
-      className="input"
-      type="text"
       placeholder="Enter address..."
+      fullWidth
     />
   );
 };

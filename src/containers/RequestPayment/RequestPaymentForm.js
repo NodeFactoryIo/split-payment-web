@@ -1,6 +1,7 @@
 import React from 'react';
+import { Button } from '@material-ui/core';
+
 import { EthAddressInput } from '../../components/EthAddressInput';
-import { REQUEST_PAYMENT_ROUTE } from '../../routes';
 
 export class RequestPaymentForm extends React.Component {
   constructor(props) {
@@ -31,18 +32,14 @@ export class RequestPaymentForm extends React.Component {
 
     return (
       <div className="payment-form">
+        {addresses.length === 0 ? null : <h3>SplittETH with:</h3>}
         {addresses.map(address => (
-          <span className="tag" key={address}>
+          <div className="tag" key={address}>
             {address}
-          </span>
+          </div>
         ))}
 
-        <div className="field">
-          <label className="label">Friend</label>
-          <div className="control">
-            <EthAddressInput addAddress={this.addAddress} />
-          </div>
-        </div>
+        <EthAddressInput addAddress={this.addAddress} />
 
         {!!requestedAmount ?
           <div>
@@ -51,9 +48,9 @@ export class RequestPaymentForm extends React.Component {
           </div>
         : null}
 
-        <button className="button is-link">
+        <Button variant="contained" color="primary">
           Request
-        </button>
+        </Button>
       </div>
     )
   }
