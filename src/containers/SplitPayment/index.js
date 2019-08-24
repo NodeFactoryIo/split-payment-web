@@ -1,11 +1,11 @@
 import React from 'react';
-import { RequestPaymentForm } from './RequestPaymentForm';
+import { SplitForm } from './SplitForm';
 
 export class RequestPayment extends React.Component {
   render() {
     return (
       <div>
-        <RequestPaymentForm amount={1000} />
+        <SplitForm amount={1000} />
       </div>
     )
   }

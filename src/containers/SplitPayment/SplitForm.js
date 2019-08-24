@@ -4,7 +4,7 @@ import { Button, Link, Chip } from '@material-ui/core';
 import { EthAddressInput } from '../../components/EthAddressInput';
 import { AddressBook } from '../AddressBook';
 
-export class RequestPaymentForm extends React.Component {
+export class SplitForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

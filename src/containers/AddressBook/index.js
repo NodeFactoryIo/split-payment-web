@@ -51,8 +51,6 @@ export function AddressBook ({ visible, onClose, onSelectedItems }) {
     setProfiles(profiles);
   }, []);
 
-  console.log(profiles);
-
   return (
     <List className={className} ref={wrapperRef}>
       {profiles.map(profile => {
