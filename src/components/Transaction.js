@@ -1,9 +1,9 @@
 import React from 'react';
 import {Avatar} from "./Avatar";
 
-export function Transaction({tx, identity, meta={}}) {
+export function Transaction({tx, identity, meta={}, onClick}) {
     return (
-        <div className="transaction round-container">
+        <div className="transaction round-container" onClick={onClick}>
             <Avatar size={10} scale={10} className="avatar" address={tx.to} />
             <div className="recipient">
                 <span className="name">{identity.name || tx.to}</span>

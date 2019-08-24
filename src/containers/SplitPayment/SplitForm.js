@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Link, Chip } from '@material-ui/core';
 
 import { EthAddressInput } from '../../components/EthAddressInput';
-import { AddressBook } from '../AddressBook';
+import { AddressBookContainer } from '../AddressBook';
 
 export class SplitForm extends React.Component {
   constructor(props) {
@@ -68,7 +68,7 @@ export class SplitForm extends React.Component {
 
         <EthAddressInput addAddress={this.addAddress} />
 
-        <AddressBook
+        <AddressBookContainer
           onSelectedItems={this.onSelectedItems}
           visible={openAddressBook}
           onClose={this.toggleAddressBook}

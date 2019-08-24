@@ -1,79 +1,50 @@
-import React, { useRef, useEffect }  from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Checkbox from '@material-ui/core/Checkbox';
+import React from 'react';
+import {SmallHeader} from "../../components/SmallHeader";
+import {HOME} from "../../routes";
+import {AddressBook} from "../../components/AddressBook";
 import Box from '3box';
-import { Avatar } from '../../components/Avatar';
 
-import { useOutsideClickHandler } from '../../utils/hooks';
+export class AddressBookContainer extends React.Component {
 
-
-export function AddressBook ({ visible, onClose, onSelectedItems }) {
-  let className = 'address-book-container';
-  className += visible ? ' active' : '';
-
-  const [checked, setChecked] = React.useState([]);
-
-  const handleToggle = value => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+  constructor(props) {
+    super(props);
+    this.state = {
+        profiles: []
     }
+  }
 
-    setChecked(newChecked);
+  componentWillMount() {
+      const addresses = ["0x77E3630DEC288c9a477bC430c44d8507068a63D1", "0xbD9f96663E07a83ff18915c9074d9dc04d8E64c9"];
+      Promise.all(
+          addresses.map(async (address) => {
+              try {
+                  const fetchedProfile = await Box.getProfile(address);
+                  return {...fetchedProfile, address };
+              } catch (e) {
+                  return {address};
+              }
+          })
+      ).then((profiles) => {
+          console.log('profiles', profiles);
+          this.setState({profiles});
+      })
+  }
+
+    goHome = () => {
+    this.props.history.push(HOME);
   };
 
-  const beforeClose = () => {
-    onSelectedItems(checked);
-    onClose();
-  };
+  render() {
+    return (
+        <div>
+          <SmallHeader title="Choose contacts" goHome={this.goHome}/>
 
-  const wrapperRef = useRef(null);
-  useOutsideClickHandler(wrapperRef, visible, beforeClose);
+          <div className="container">
+            <AddressBook profiles={this.state.profiles}/>
+          </div>
+        </div>
+    );
+  }
 
-  const [profiles, setProfiles] = React.useState([]);
 
-  useEffect(() => {
-    // TODO: read addresses from props
-    const addresses = ['0xAf0f557a9a7E84Bdd02aDBc14962df2789d95D4e'];
-    const profiles = [];
-    addresses.map(async(address) => {
-      const fetchedProfile = await Box.getProfile(address);
-      profiles.push({...fetchedProfile, address });
-    });
-    setProfiles(profiles);
-  }, []);
-
-  return (
-    <List className={className} ref={wrapperRef}>
-      {profiles.map(profile => {
-        return (
-          <ListItem key={profile.address} dense button>
-            <ListItemAvatar>
-              <Avatar imageHash={profile.image[0].contentUrl['/']}/>
-            </ListItemAvatar>
-
-            <ListItemText primary={profile.name} />
-
-            <ListItemSecondaryAction>
-              <Checkbox
-                onClick={handleToggle(profile.address)}
-                edge="start"
-                checked={checked.indexOf(profile.address) !== -1}
-                tabIndex={-1}
-                disableRipple
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-        );
-      })}
-    </List>
-  )
 }
