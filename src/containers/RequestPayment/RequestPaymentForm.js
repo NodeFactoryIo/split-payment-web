@@ -1,5 +1,4 @@
 import React from 'react';
-import { ethers } from 'ethers';
 import { EthAddressInput } from '../../components/EthAddressInput';
 
 export class RequestPaymentForm extends React.Component {
@@ -7,6 +6,7 @@ export class RequestPaymentForm extends React.Component {
     super(props);
     this.state = {
       addresses: [],
+      requestedAmount: 0,
     };
 
     this.addAddress = this.addAddress.bind(this);
@@ -14,13 +14,22 @@ export class RequestPaymentForm extends React.Component {
 
   addAddress(address) {
     this.setState({ addresses: [...this.state.addresses, address] });
+
+    this.calculateSplitAmount(this.state.addresses.length + 1);
+  }
+
+  calculateSplitAmount(numberOfAddresses) {
+    const { amount } = this.props;
+
+    const requestedAmount = amount / (numberOfAddresses + 1);
+    this.setState({ requestedAmount });
   }
 
   render() {
-    const { addresses } = this.state;
+    const { addresses, requestedAmount } = this.state;
 
     return (
-      <div>
+      <div className="payment-form">
         {addresses.map(address => (
           <span className="tag" key={address}>
             {address}
@@ -33,6 +42,13 @@ export class RequestPaymentForm extends React.Component {
             <EthAddressInput addAddress={this.addAddress} />
           </div>
         </div>
+
+        {!!requestedAmount ?
+          <div>
+            <label className="label">Amount to be requested</label>
+            <span>{requestedAmount}</span>
+          </div>
+        : null}
       </div>
     )
   }

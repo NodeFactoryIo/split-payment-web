@@ -5,7 +5,7 @@ export class RequestPayment extends React.Component {
   render() {
     return (
       <div>
-        <RequestPaymentForm/>
+        <RequestPaymentForm amount={1000} />
       </div>
     )
   }
