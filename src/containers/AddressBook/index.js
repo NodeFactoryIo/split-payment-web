@@ -8,11 +8,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { useOutsideClickHandler } from '../../utils/hooks';
 
 
-export function AddressBook ({ visible, onClose }) {
+export function AddressBook ({ visible, onClose, onSelectedItems }) {
   let className = 'address-book-container';
   className += visible ? ' active' : '';
 
-  const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = React.useState([]);
 
   const handleToggle = value => () => {
     const currentIndex = checked.indexOf(value);
@@ -27,8 +27,13 @@ export function AddressBook ({ visible, onClose }) {
     setChecked(newChecked);
   };
 
+  const beforeClose = () => {
+    onSelectedItems(checked);
+    onClose();
+  };
+
   const wrapperRef = useRef(null);
-  useOutsideClickHandler(wrapperRef, visible, onClose);
+  useOutsideClickHandler(wrapperRef, visible, beforeClose);
 
   return (
     <List className={className} ref={wrapperRef}>
@@ -36,7 +41,7 @@ export function AddressBook ({ visible, onClose }) {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)}>
+          <ListItem key={value} dense button onClick={handleToggle(value)}>
             <ListItemIcon>
               <Checkbox
                 edge="start"
