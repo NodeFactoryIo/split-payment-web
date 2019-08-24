@@ -34,30 +34,34 @@ export class TransactionsList extends React.Component {
     const { transactions } = this.props;
 
     return (
-      {/*<List className="transactions-list">*/}
-      {/*  {transactions.map((tx, index) => {*/}
-      {/*    const amount = `${ethers.utils.formatEther(tx.value)} ETH`;*/}
-      {/*    return (*/}
-      {/*      <ListItem key={index}>*/}
-      {/*        <ListItemAvatar>*/}
-      {/*          <Avatar address={tx.to} />*/}
-      {/*        </ListItemAvatar>*/}
-      {/*        <ListItemText primary={tx.hash} secondary={`${tx.to} - ${amount}`} />*/}
-      {/*        <ListItemSecondaryAction>*/}
-      {/*          <IconButton edge="end" aria-label="delete">*/}
-      {/*            <SplitIcon />*/}
-      {/*          </IconButton>*/}
-      {/*        </ListItemSecondaryAction>*/}
-      {/*      </ListItem>*/}
-      {/*    )*/}
-      {/*  })}*/}
-      {/*</List>*/}
         <div>
           <SmallHeader title="Pick transaction to split"/>
           <div  className="container transaction-list">
-            <Transaction />
+            <Transaction tx={{to: "0xbD9f96663E07a83ff18915c9074d9dc04d8E64c9", amount: "1000"}} identity={{name: "Node Factory"}} meta={{currency: 'dai'}} />
+            <Transaction tx={{to: "0x77E3630DEC288c9a477bC430c44d8507068a63D1", amount: "2.1"}} identity={{name: null}} />
+            <Transaction tx={{to: "0x4ae2be02E9746B39e34029b334320026b842BB83", amount: "4.3"}} identity={{name: "Dell"}} />
+            <Transaction tx={{to: "0xbaF8f29F82E754Fec7fC45153a6866c989Ff03C4", amount: "1000"}} identity={{name: "Jana"}} meta={{currency: 'dai'}} />
+            <Transaction tx={{to: "0x4ae2be02E9746B39e34029b334320026b842BB83", amount: "2.394"}} identity={{name: "Club Mate"}} />
           </div>
         </div>
+      // {/*<List className="transactions-list">*/}
+      // {/*  {transactions.map((tx, index) => {*/}
+      // {/*    const amount = `${ethers.utils.formatEther(tx.value)} ETH`;*/}
+      // {/*    return (*/}
+      // {/*      <ListItem key={index}>*/}
+      // {/*        <ListItemAvatar>*/}
+      // {/*          <Avatar address={tx.to} />*/}
+      // {/*        </ListItemAvatar>*/}
+      // {/*        <ListItemText primary={tx.hash} secondary={`${tx.to} - ${amount}`} />*/}
+      // {/*        <ListItemSecondaryAction>*/}
+      // {/*          <IconButton edge="end" aria-label="delete">*/}
+      // {/*            <SplitIcon />*/}
+      // {/*          </IconButton>*/}
+      // {/*        </ListItemSecondaryAction>*/}
+      // {/*      </ListItem>*/}
+      // {/*    )*/}
+      // {/*  })}*/}
+      // {/*</List>*/}
     )
   }
 }

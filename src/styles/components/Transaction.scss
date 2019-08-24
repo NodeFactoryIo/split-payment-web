@@ -1,3 +1,5 @@
+@import "../colors";
+
 .transaction {
   width: 100%;
   height: 120px;
@@ -5,15 +7,88 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  margin-bottom: 20px;
+
+  .avatar-container {
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+  }
+
+  .recipient {
+    margin-top: 30px;
+    margin-left: 20px;
+    justify-content: flex-start;
+    flex-direction: column;
+    display: flex;
+    font-weight: bold;
+
+    .name {
+      color: white;
+      font-size: 20px;
+    }
+
+    .address {
+      color: white;
+    }
+  }
+
+  .right {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .amount {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-right: 20px;
+
+    .currency-icon {
+      width: 40px;
+      padding: 5px;
+    }
+  }
+
+  .overlay {
+    opacity: 1;
+    background-color: $color-main;
+  }
 
   &:hover {
     background-color: white;
     transition: 0.4s;
+
+    .recipient {
+      .name {
+        color: $color-main !important;
+      }
+
+      .address {
+        color: $color-main !important;
+      }
+
+    }
+
+    .amount {
+      color: $color-main;
+    }
+
+    .overlay {
+      opacity: 0.5;
+      transition: .5s ease;
+    }
   }
 
-  .avatar {
-    margin: 10px;
-    width: 100px;
-    border-radius: 50%;
+  .MuiAvatar-root {
+    width: 80px;
+    height: 80px;
+    margin: 15px;
   }
 }

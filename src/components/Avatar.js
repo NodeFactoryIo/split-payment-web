@@ -7,11 +7,12 @@ export class Avatar extends React.Component {
   getOpts() {
     return {
       seed: this.props.address || 'foo',
-      color: this.props.color || '#dfe',
-      bgcolor: this.props.bgcolor || '#aaa',
+      // color: this.props.color || '#dfe',
+      // bgcolor: this.props.bgcolor || '#aaa',
       size: this.props.size || 15,
       scale: this.props.scale || 3,
-      spotcolor: this.props.spotcolor || '#000',
+      // spotcolor: this.props.spotcolor || '#000',
+      className: this.props.className || '',
     };
   }
 
@@ -34,11 +35,13 @@ export class Avatar extends React.Component {
 
 
     return (
-      <MaterialAvatar>
-        {!imageHash ? blockie : null}
+        <div className="avatar-container">
+          <MaterialAvatar>
+            {!imageHash ? blockie : null}
 
-        {imageHash ? <img className="avatar" src={getAssetURL(imageHash)} /> : null}
-      </MaterialAvatar>
+            {imageHash ? <img className="avatar" src={getAssetURL(imageHash)} /> : null}
+          </MaterialAvatar>
+        </div>
     );
   }
 }
