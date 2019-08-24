@@ -8,12 +8,12 @@ function* getETHTransactions() {
     const url = ETH_TRANSACTIONS_URL.replace(':address', payload.address);
     try {
       const response = yield call(fetch, url);
-      const responseBody = yield response.json();
+      const payload = yield response.json();
 
-      if (responseBody.status !== "0") {
-        yield put({ type: REQUEST_ETH_TRANSACTIONS_SUCCESS, payload: responseBody.result.slice(0, 10) });
+      if (payload.status !== "0") {
+        yield put({ type: REQUEST_ETH_TRANSACTIONS_SUCCESS, payload: payload.result });
       } else {
-        throw new Error(responseBody.result);
+        throw new Error(payload.result);
       }
     } catch (e) {
       console.error(e.message);
