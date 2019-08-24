@@ -1,0 +1,24 @@
+@import "../colors";
+
+.contact-button {
+  height: 60px;
+  margin-right: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 300px;
+
+  .title {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  &:hover {
+    background-color: white;
+    transition: 0.4s ease;
+    color: $color-main;
+  }
+}

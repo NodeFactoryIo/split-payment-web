@@ -3,6 +3,7 @@ import {SmallHeader} from "../../components/SmallHeader";
 import {HOME} from "../../routes";
 import {AddressBook} from "../../components/AddressBook";
 import Box from '3box';
+import {ContactsButton} from "../../components/ContactsButton";
 
 export class AddressBookContainer extends React.Component {
 
@@ -34,10 +35,16 @@ export class AddressBookContainer extends React.Component {
     this.props.history.push(HOME);
   };
 
+  getSubmitButton() {
+     return (
+         <ContactsButton count={2}/>
+     )
+  }
+
   render() {
     return (
         <div>
-          <SmallHeader title="Choose contacts" goHome={this.goHome}/>
+          <SmallHeader title="Choose contacts" goHome={this.goHome} rightButton={this.getSubmitButton()}/>
 
           <div className="container">
             <AddressBook profiles={this.state.profiles}/>
