@@ -4,7 +4,7 @@ import {HOME, SPLIT_SUCCESS} from "../../routes";
 import {AddressBook} from "../../components/AddressBook";
 import Box from '3box';
 import {ContactsButton} from "../../components/ContactsButton";
-import {Requester, SplitWallet} from "@nodefactory/split-payment-sdk";
+import {Requester} from "@nodefactory/split-payment-sdk";
 import { Web3Context } from '../../Web3Provider';
 
 export class AddressBookContainer extends React.Component {
@@ -21,7 +21,11 @@ export class AddressBookContainer extends React.Component {
 
   componentWillMount() {
       // TODO: fetch from 3box the address book
-      const addresses = ["0x77E3630DEC288c9a477bC430c44d8507068a63D1", "0xbD9f96663E07a83ff18915c9074d9dc04d8E64c9"];
+      const addresses = [
+        "0x77E3630DEC288c9a477bC430c44d8507068a63D1", "0xbD9f96663E07a83ff18915c9074d9dc04d8E64c9",
+        "0x85994c16c45CE39827785606B037f3A1D0381dc3", "0x36Ca879e11aA582AB92d43547da1EA5cFd57067b"
+      ];
+
       Promise.all(
           addresses.map(async (address) => {
               try {
