@@ -26,7 +26,7 @@ export function Transaction({tx, identity, meta={}, onClick}) {
             </div>
             <div className="right">
                 <div className="amount">
-                    <span className="number">{`${ethers.utils.formatEther(tx.value)}`}</span>
+                    <span className="number">{`${ethers.utils.formatEther(tx.value).substring(0, 4)}`}</span>
                     <img className="currency-icon" src={require(`../assets/img/${meta.currency || "eth"}.png`)} />
                 </div>
             </div>
