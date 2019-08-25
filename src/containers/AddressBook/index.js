@@ -6,15 +6,17 @@ import Box from '3box';
 import {ContactsButton} from "../../components/ContactsButton";
 
 export class AddressBookContainer extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-        profiles: []
+        profiles: [],
+        selectedProfiles: [],
     }
+    this.onSelectedProfile = this.onSelectedProfile.bind(this);
   }
 
   componentWillMount() {
+      // TODO: fetch from 3box the address book
       const addresses = ["0x77E3630DEC288c9a477bC430c44d8507068a63D1", "0xbD9f96663E07a83ff18915c9074d9dc04d8E64c9"];
       Promise.all(
           addresses.map(async (address) => {
@@ -40,18 +42,42 @@ export class AddressBookContainer extends React.Component {
   };
 
   getSubmitButton() {
+    const { selectedProfiles } = this.state;
+
      return (
-         <ContactsButton count={2} onClick={this.sendNotifications}/>
+         <ContactsButton count={selectedProfiles.length} onClick={this.sendNotifications}/>
      )
   }
 
+  onSelectedProfile(address) {
+    const { selectedProfiles } = this.state;
+    const currentIndex = selectedProfiles.indexOf(address);
+    const newSelectedProfiles = [...selectedProfiles];
+
+    if (currentIndex === -1) {
+      newSelectedProfiles.push(address);
+    } else {
+      newSelectedProfiles.splice(currentIndex, 1);
+    }
+
+    this.setState({ selectedProfiles: newSelectedProfiles });
+  }
+
   render() {
+    console.log(this.state.selectedProfiles);
     return (
         <div>
-          <SmallHeader title="Choose contacts" goHome={this.goHome} rightButton={this.getSubmitButton()}/>
+          <SmallHeader
+            title="Choose contacts"
+            goHome={this.goHome}
+            rightButton={this.getSubmitButton()}
+          />
 
           <div className="container">
-            <AddressBook profiles={this.state.profiles}/>
+            <AddressBook
+              onChecked={this.onSelectedProfile}
+              profiles={this.state.profiles}
+            />
           </div>
         </div>
     );

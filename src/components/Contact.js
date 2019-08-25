@@ -2,7 +2,7 @@ import React from "react";
 import {Avatar} from "./Avatar";
 import {Checkbox} from "@material-ui/core";
 
-export function Contact({profile}) {
+export function Contact({ profile, onChecked }) {
 
     function getAvatar(profile) {
         if(profile.image) {
@@ -16,19 +16,19 @@ export function Contact({profile}) {
         }
     }
 
-    function checkContact(address) {
-
+    function checkContact() {
+        onChecked(profile.address);
     }
 
     return (
         <div className="contact round-container" onClick={checkContact}>
 
-            {
-                getAvatar(profile)
-            }
+            { getAvatar(profile) }
 
             <div className="person">
-                <span className="name">{profile.name || `${profile.address.substring(0, 7)}...${profile.address.substring(profile.address.length - 5)}`}</span>
+                <span className="name">
+                    {profile.name || `${profile.address.substring(0, 7)}...${profile.address.substring(profile.address.length - 5)}`}
+                </span>
                 <span className="address">{profile.address}</span>
             </div>
             <div className="right">
