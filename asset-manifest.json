@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/split-payment-web/static/css/main.e661ccbd.chunk.css",
+    "main.js": "/split-payment-web/static/js/main.958c1569.chunk.js",
+    "main.js.map": "/split-payment-web/static/js/main.958c1569.chunk.js.map",
+    "runtime~main.js": "/split-payment-web/static/js/runtime~main.f7a34bc5.js",
+    "runtime~main.js.map": "/split-payment-web/static/js/runtime~main.f7a34bc5.js.map",
+    "static/js/2.115664cd.chunk.js": "/split-payment-web/static/js/2.115664cd.chunk.js",
+    "static/js/2.115664cd.chunk.js.map": "/split-payment-web/static/js/2.115664cd.chunk.js.map",
+    "index.html": "/split-payment-web/index.html",
+    "precache-manifest.92002603903ea94934a8b0ef5840dd08.js": "/split-payment-web/precache-manifest.92002603903ea94934a8b0ef5840dd08.js",
+    "service-worker.js": "/split-payment-web/service-worker.js",
+    "static/css/main.e661ccbd.chunk.css.map": "/split-payment-web/static/css/main.e661ccbd.chunk.css.map",
+    "static/media/correct.png": "/split-payment-web/static/media/correct.10166e94.png",
+    "static/media/split-network-mini.png": "/split-payment-web/static/media/split-network-mini.020d899e.png",
+    "static/media/split-network.png": "/split-payment-web/static/media/split-network.b961b0ed.png"
+  }
+}
