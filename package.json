@@ -2,7 +2,7 @@
   "name": "web",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nodefactoryio.github.io/split-payment-web",
+  "homepage": "https://elastic-blackwell-31ff69.netlify.com/",
   "dependencies": {
     "3box": "^1.10.7",
     "@material-ui/core": "^4.3.3",
