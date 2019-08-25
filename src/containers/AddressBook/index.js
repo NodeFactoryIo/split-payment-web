@@ -4,8 +4,12 @@ import {HOME, SPLIT_SUCCESS} from "../../routes";
 import {AddressBook} from "../../components/AddressBook";
 import Box from '3box';
 import {ContactsButton} from "../../components/ContactsButton";
+import {Requester, SplitWallet} from "@nodefactory/split-payment-sdk";
+import { Web3Context } from '../../Web3Provider';
 
 export class AddressBookContainer extends React.Component {
+  static contextType = Web3Context;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -37,8 +41,37 @@ export class AddressBookContainer extends React.Component {
     this.props.history.push(HOME);
   };
 
-  sendNotifications = () => {
-      this.props.history.push(SPLIT_SUCCESS);
+  requestPayment = async (requester, from, to, amount) => {
+    console.log(await requester.request([
+      {
+        from,
+        to,
+        amount,
+        currency: "ETH"
+      }
+    ]));
+  };
+
+  calculateSplitAmount(numberOfAddresses) {
+    const { value } = this.props.location.state;
+    return value / (numberOfAddresses + 1);
+  }
+
+  sendNotifications = async () => {
+    const { provider } = this.context;
+    const { selectedProfiles } = this.state;
+    const amount = this.calculateSplitAmount(selectedProfiles.length);
+
+    const accounts = await provider.listAccounts();
+    const requester = new Requester(accounts[0], window.ethereum);
+    await requester.init();
+
+    const promises = [];
+    selectedProfiles.map((profile) =>
+      promises.push(this.requestPayment(requester, accounts[0], profile.address, amount)));
+
+    await Promise.all(promises);
+    this.props.history.push(SPLIT_SUCCESS);
   };
 
   getSubmitButton() {
@@ -64,6 +97,8 @@ export class AddressBookContainer extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+
     const { selectedProfiles } = this.state;
 
     return (

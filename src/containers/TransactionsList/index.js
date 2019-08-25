@@ -19,17 +19,17 @@ class TransactionsList extends React.Component {
       });
     }
 
-    chooseContacts = () => {
-        this.props.history.push(SPLIT_CONTACTS);
+    onTxClick = (tx) => {
+        this.props.history.push(SPLIT_CONTACTS, { value: tx.value });
     };
 
     goHome = () => {
         this.props.history.push(HOME);
     };
 
-    getTx = (tx) => {
+    renderTx = (tx) => {
         return (
-            <Transaction onClick={this.chooseContacts}
+            <Transaction onClick={() => this.onTxClick(tx)}
                          tx={tx}
                          identity={tx.identity}
                          meta={{currency: 'eth'}}/>
@@ -38,13 +38,12 @@ class TransactionsList extends React.Component {
 
     render() {
         const {transactions} = this.props;
-        console.log(transactions);
         return (
             <div>
                 <SmallHeader title="Pick transaction to split" goHome={this.goHome}/>
                 <div className="container transaction-list">
                     {
-                        transactions.map(this.getTx)
+                        transactions.map(this.renderTx)
                     }
                 </div>
             </div>
