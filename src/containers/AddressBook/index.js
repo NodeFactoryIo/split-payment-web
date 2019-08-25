@@ -64,7 +64,8 @@ export class AddressBookContainer extends React.Component {
   }
 
   render() {
-    console.log(this.state.selectedProfiles);
+    const { selectedProfiles } = this.state;
+
     return (
         <div>
           <SmallHeader
@@ -77,6 +78,7 @@ export class AddressBookContainer extends React.Component {
             <AddressBook
               onChecked={this.onSelectedProfile}
               profiles={this.state.profiles}
+              selectedProfiles={selectedProfiles}
             />
           </div>
         </div>

@@ -2,8 +2,7 @@ import React from "react";
 import {Avatar} from "./Avatar";
 import {Checkbox} from "@material-ui/core";
 
-export function Contact({ profile, onChecked }) {
-
+export function Contact({ profile, onChecked, checked }) {
     function getAvatar(profile) {
         if(profile.image) {
             return (
@@ -32,7 +31,11 @@ export function Contact({ profile, onChecked }) {
                 <span className="address">{profile.address}</span>
             </div>
             <div className="right">
-                <Checkbox color="#3D67FF"/>
+                <Checkbox
+                  color="#3D67FF"
+                  checked={checked}
+                  value={profile.address}
+                />
             </div>
         </div>
     )
